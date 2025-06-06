@@ -7,18 +7,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class SaleDto {
+public class SaleRequest {
 
-    private Long saleId;
+    @NotBlank(message = "Customer identifier is required")
     private String customerIdentifier;
+    @NotNull(message = "ProductId is required")
     private Long productId;
+    @NotNull(message = "Quantity purchased is required")
     private Integer quantityPurchased;
-    private LocalDate saleDate;
-    private Double totalAmountSale;
 }
