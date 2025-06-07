@@ -45,7 +45,7 @@ public class ProductController {
         return new ResponseEntity<>("Product delete success!", HttpStatus.OK);
     }
 
-    @GetMapping("filter")
+    @GetMapping("/filter")
     public ResponseEntity<List<ProductDto>> findByCategory(@RequestParam String category){
         return new ResponseEntity<>(productService.findByCategory(category), HttpStatus.OK);
     }

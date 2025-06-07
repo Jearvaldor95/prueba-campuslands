@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    boolean existsByName(String name);
+    boolean existsBySKU(String SKU);
     List<Product> findByCategory(String category);
 }
