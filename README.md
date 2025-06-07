@@ -36,17 +36,17 @@ API RESTful para la gestión de una tienda de abarrotes, desarrollada con **Spri
 ### 1. Clonar el repositorio
 
 ```bash
-git https://github.com/Jearvaldor95/prueba-campuslands.git
-cd prueba-campuslands
+https://github.com/Jearvaldor95/jesus_valeta_java_campus.git
+cd jesus_valeta_java_campus
 ````
 
 ### 2. Crear archivo .env
 Crea un archivo .env en la raíz del proyecto con el siguiente contenido:
 
 ```bash
-DB_URL=jdbc:mysql://localhost:3306/grocery_db
-DB_USERNAME=root
-DB_PASSWORD=tu_contraseña
+DATASOURCE_DEV=jdbc:mysql://localhost:3306/grocery_db
+USERNAME_DEV=root
+PASSWORD_DEV=tu_contraseña
 ```
 Asegúrate de tener una base de datos MySQL creada llamada grocery_db.
 
