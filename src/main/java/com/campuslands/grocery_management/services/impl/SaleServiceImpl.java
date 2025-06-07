@@ -9,6 +9,8 @@ import com.campuslands.grocery_management.models.Sale;
 import com.campuslands.grocery_management.repositories.ProductRepository;
 import com.campuslands.grocery_management.repositories.SaleRepository;
 import com.campuslands.grocery_management.services.SaleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ public class SaleServiceImpl implements SaleService {
     private final SaleMapper saleMapper;
     private final ProductRepository productRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(SaleServiceImpl.class);
+
     public SaleServiceImpl(SaleRepository saleRepository, SaleMapper saleMapper, ProductRepository productRepository){
         this.saleRepository = saleRepository;
         this.saleMapper = saleMapper;
@@ -32,12 +36,14 @@ public class SaleServiceImpl implements SaleService {
                 .orElseThrow(() -> new ProductNotFountException("Product not fount with: "+ saleDto.getProductId()));
 
         if (product.getStock() < saleDto.getQuantityPurchased()) {
+            logger.warn("Attempt add insufficient stock for the product: {}",product.getName());
             throw new BadRequestException("Insufficient stock for the product: " + product.getName());
         }
         double totalSale = product.getUnitPrice() * saleDto.getQuantityPurchased();
 
         product.setStock(product.getStock() - saleDto.getQuantityPurchased());
         productRepository.save(product);
+        logger.info("Stock discount for the product: {}", product.getName());
         return totalSale;
     }
     @Override
@@ -50,7 +56,9 @@ public class SaleServiceImpl implements SaleService {
 
         LocalDate hoy = LocalDate.now();
         sale.setSaleDate(hoy);
-        return saleMapper.toSaleDto(saleRepository.save(sale));
+        Sale saveSale = saleRepository.save(sale);
+        logger.info("Save sale success: {}", saveSale);
+        return saleMapper.toSaleDto(saveSale);
     }
 
     @Override
