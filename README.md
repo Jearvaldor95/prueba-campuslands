@@ -1,6 +1,6 @@
 # prueba-campuslands
 
-API RESTful para la gestión de una tienda de abarrotes, desarrollada con **Spring Boot** y **MySQL**. Esta API permite administrar productos disponibles y registrar ventas, actualizando el stock automáticamente.
+API REST para la gestión de una tienda de abarrotes, desarrollada con **Spring Boot** y **MySQL**. Esta API permite administrar productos disponibles y registrar ventas, actualizando el stock automáticamente.
 
 ## 🚀 Tecnologías
 
@@ -16,20 +16,44 @@ API RESTful para la gestión de una tienda de abarrotes, desarrollada con **Spri
 
 ### 🛒 Producto (`/api/products`)
 
-- **GET** `/` - Obtener todos los productos.
+- **GET** - Obtener todos los productos.
 - **GET** `/{id}` - Obtener un producto por su ID.
-- **POST** `/` - Crear un nuevo producto.
+- **POST** - Crear un nuevo producto.
 - **PUT** `/{id}` - Actualizar un producto existente.
-- **DELETE** `/{id}` - Eliminar un producto.
+- **DELETE** `/{id}` - Eliminar un producto por sU ID.
 - **GET** `/filter?category=categoryName` - Obtener productos por categoría.
 
 ### 💰 Venta (`/api/sales`)
 
-- **POST** `/` - Registrar una nueva venta (verifica stock antes).
-- **GET** `/` - Listar todas las ventas.
+- **POST** - Registrar una nueva venta (verifica stock antes).
+- **GET** - Listar todas las ventas.
 - **GET** `/customer/{customerIdentifier}` - Obtener una venta por identificador del cliente.
 
 > 💡 Cada venta descuenta el stock del producto correspondiente.
+
+## Para crear un producto
+```bash
+Ejemplo del JSON
+
+{
+    "sku": "CEL-73883",
+    "name": "telefono xp",
+    "unitPrice": 3600000.00,
+    "stock": 10,
+    "category": "Movil"
+}
+```
+
+## Para crear una venta
+```bash
+Ejemplo del JSON
+
+{
+    "customerIdentifier": "12345",
+    "productId": 1,
+    "quantityPurchased": 2
+}
+```
 
 ## ⚙️ Configuración
 
